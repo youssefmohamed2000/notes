@@ -6,8 +6,6 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
-$current_user_id = 1; // hard code until authentication
-
 $query = 'SELECT notes.* , users.name AS username
             FROM notes  
             INNER JOIN users
@@ -22,12 +20,12 @@ if (!isset($_GET['page'])) {
   $page = $_GET['page'];
 }
 
-$resulPerPage = 3;
-$pageFirstResult = ($page - 1) * $resulPerPage;
+$resultPerPage = 3;
+$pageFirstResult = ($page - 1) * $resultPerPage;
 
-$numberOfPages = ceil($resultCount / $resulPerPage);
+$numberOfPages = ceil($resultCount / $resultPerPage);
 
-$query .= " LIMIT " . $pageFirstResult . ',' . $resulPerPage;
+$query .= " LIMIT " . $pageFirstResult . ',' . $resultPerPage;
 
 $notes = $db->query($query)->all();
 

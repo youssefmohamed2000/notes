@@ -50,7 +50,6 @@ if ($user) {
   );
 } else {
 
-
   // create new user
   $db->query('INSERT INTO users (name , email , password) VALUES(:name , :email , :password)', [
     'name' => $name,
@@ -58,8 +57,13 @@ if ($user) {
     'password' => password_hash($password, PASSWORD_DEFAULT)
   ]);
 
+  $user = $db->query('SELECT id FROM users WHERE email = :email', [
+    'email' => $email
+  ])->find();
+
   // store user in session
   login([
+    'id' => $user['id'],
     'name' => $name,
     'email' => $email
   ]);

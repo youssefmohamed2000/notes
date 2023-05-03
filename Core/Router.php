@@ -60,10 +60,15 @@ class Router
         && $route['method'] === strtoupper($method)
       ) {
         Middleware::resolve($route['middleware']);
-        return require_once basePath($route['controller']);
+        return require_once basePath('Http' . DS . 'controllers' . DS . $route['controller']);
       }
     }
 
     abort(404);
-  }
+  } // end of route
+
+  public function previousUrl()
+  {
+    return $_SERVER['HTTP_REFERER'];
+  } // end of previousUrl
 } // end of class

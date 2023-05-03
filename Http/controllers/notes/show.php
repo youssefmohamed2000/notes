@@ -6,7 +6,7 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
-$current_user_id = 2;
+$current_user_id = $_SESSION['user']['id'];
 
 $query = "SELECT notes.* , users.name AS username
 						FROM notes 
@@ -16,7 +16,9 @@ $query = "SELECT notes.* , users.name AS username
 
 $notes = $db->query($query)->all();
 
-authorize($notes[0]['user_id'] === $current_user_id);
+if (!empty($notes)) {
+	authorize($notes[0]['user_id'] === $current_user_id);
+}
 
 view('notes/show.view.php', [
 	'notes' => $notes,

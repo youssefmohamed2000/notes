@@ -3,6 +3,8 @@
 session_start();
 
 use Core\Router;
+use Core\Session;
+use Core\ValidationException;
 
 const DS = DIRECTORY_SEPARATOR;
 
@@ -22,4 +24,16 @@ $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 
-$router->route($uri, $method);
+try {
+
+  $router->route($uri, $method);
+} catch (ValidationException $e) {
+
+  Session::flash('errors', $e->errors);
+
+  Session::flash('old', $e->old);
+
+  return redirect($router->previousUrl());
+}
+
+Session::unflash();

@@ -1,5 +1,7 @@
 <?php
 
+use Core\Session;
+
 function dd($value)
 {
 
@@ -51,27 +53,6 @@ function view($path, $attributes = [])
   require_once basePath('views' . DS . $path);
 } // end of view
 
-function login($user)
-{
-  $_SESSION['user'] = [
-    'name' => $user['name'],
-    'email' => $user['email'],
-  ];
-
-  session_regenerate_id(true);
-} // end of login
-
-function logout()
-{
-  $_SESSION = [];
-
-  session_destroy();
-
-  $params = session_get_cookie_params();
-
-  setcookie('PHPSESSID', '', time() - 3600, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
-} // end of logout
-
 function auth()
 {
   if (!isset($_SESSION['user'])) {
@@ -80,3 +61,14 @@ function auth()
 
   return true;
 } // end of auth
+
+function redirect($path)
+{
+  header("location: {$path}");
+  exit();
+} // end of redirect
+
+function old($key, $default = '')
+{
+  return Session::get('old')[$key] ?? $default;
+} // end of old

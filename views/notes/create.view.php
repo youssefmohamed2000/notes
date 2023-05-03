@@ -1,30 +1,41 @@
-<!-- Add Notes Modal -->
-<div class="modal fade" id="createNote" tabindex="-1" aria-labelledby="createNoteLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="createNoteLabel">Create</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="/notes" method="post">
-          <div class="form-group">
-            <label for="body">Body</label>
-            <input type="text" name="body" class="form-control" id="body" placeholder="Enter Your Note">
-            <?php 
-            if (isset($_SESSION['errors'])) {
-              echo '<small id="emailHelp" class="form-text text-danger"></small>';
-            }
-            ?>
-          </div>
-          <input type="hidden" name="_method" value="post">
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-          </div>
-        </form>
-      </div>
+<?php
+
+view('templates/header.php')
+
+?>
+<h1 class="text-center  mt-5 mb-2 py-3">Create Note</h1>
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-8 mx-auto">
+
+      <form class="p-5 border rounded mb-5" method="POST" action="/notes">
+        <div class="form-group">
+          <label for="body">Body</label>
+          <input type="text" name="body" class="form-control" id="body">
+          <?php if (isset($errors['body'])) { ?>
+            <span class="text-danger"><?= $errors['body'] ?></span>
+          <?php } ?>
+          <br>
+        </div>
+
+        <div class="form-group d-flex justify-content-end gap-2">
+          <button type="submit" name="submit" class=" btn btn-primary">
+            Add
+          </button>
+          <a href="/notes" class="btn btn-secondary">Cancel</a>
+
+        </div>
+      </form>
+
     </div>
   </div>
 </div>
 
+<?php
+
+view('templates/footer.php')
+
+?>

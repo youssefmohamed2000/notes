@@ -24,9 +24,7 @@
               <a class="nav-link" href="/notes">Notes</a>
             </li>
             <li class="nav-item">
-              <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#createNote">
-                Add Note
-              </a>
+              <a class="nav-link" href="/notes/create">Add Notes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/my-notes">My Notes</a>
@@ -64,9 +62,3 @@
       </div>
     </div>
   </nav>
-
-  <?php
-
-  view('notes/create.view.php');
-
-  ?>

@@ -15,12 +15,9 @@ if (!Validator::string($_POST['body'], 2, 225)) {
 }
 
 if (!empty($errors)) {
-  // view('notes/create.view.php', [
-  //   'errors' => $errors,
-  // ]);
-  echo '<script>
-          window.history.back(-1);
-        </script>';
+  view('notes/create.view.php', [
+    'errors' => $errors,
+  ]);
 
   exit();
 }
@@ -29,7 +26,7 @@ $db->query(
   'INSERT INTO notes (body , user_id) VALUES (:body , :user_id)',
   [
     'body' => $_POST['body'],
-    'user_id' => 1,
+    'user_id' => $_SESSION['user']['id'],
   ]
 );
 

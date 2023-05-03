@@ -5,7 +5,7 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
-$current_user_id = 1; // hard code until authentication
+$current_user_id = $_SESSION['user']['id'];
 
 $query = 'SELECT * FROM notes WHERE id = :id';
 
