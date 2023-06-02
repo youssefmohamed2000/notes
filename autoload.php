@@ -1,7 +1,7 @@
 <?php
 
-spl_autoload_register(function ($calss) {
+spl_autoload_register(function ($class) {
 
-  $calss = str_replace('\\', DIRECTORY_SEPARATOR, $calss);
-  require_once basePath($calss . '.php');
+  $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+  require_once basePath($class . '.php');
 });
