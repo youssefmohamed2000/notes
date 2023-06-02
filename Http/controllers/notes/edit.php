@@ -2,6 +2,7 @@
 
 use Core\App;
 use Core\Database;
+use Core\Session;
 
 $db = App::resolve(Database::class);
 
@@ -15,5 +16,6 @@ $note = $db->query(
 authorize($note['user_id'] === $current_user_id);
 
 view('notes/edit.view.php', [
-    'note' => $note
+    'note' => $note,
+    'errors' => Session::get('errors')
 ]);

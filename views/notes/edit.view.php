@@ -13,19 +13,15 @@ view('templates/header.php')
 
             <form class="p-5 border rounded mb-5" method="POST" action="/notes">
 
-                <?php
-                if (!empty($errors)) : ?>
-                    <p class="alert alert-danger text-center">
-                        <?= $errors['body'] ?>
-                    </p>
-                <?php
-                endif; ?>
                 <input type="hidden" name="_method" value="PATCH">
                 <input type="hidden" name="id" value="<?= $note['id'] ?>">
                 <div class="form-group">
 
                     <label for="body">Body</label>
                     <input type="text" name="body" class="form-control" id="body" value="<?= $note['body'] ?>">
+                    <?php if (isset($errors['body'])) { ?>
+                        <span class="text-danger"><?= $errors['body'] ?></span>
+                    <?php } ?>
                     <br>
 
                 </div>

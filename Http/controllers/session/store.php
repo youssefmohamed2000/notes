@@ -1,10 +1,10 @@
 <?php
 
 use Core\Authenticator;
-use Http\Forms\LoginForm;
+use Http\Forms\FormValidation;
 
 // validation 
-$validator = LoginForm::validate($attributes = [
+$validator = FormValidation::validate($attributes = [
   'email' => $_POST['email'],
   'password' => $_POST['password']
 ]);

@@ -14,7 +14,7 @@ view('templates/header.php')
       <form class="p-5 border rounded mb-5" method="POST" action="/notes">
         <div class="form-group">
           <label for="body">Body</label>
-          <input type="text" name="body" class="form-control" id="body">
+          <input type="text" name="body" class="form-control" id="body" value="<?= old('body') ?>">
           <?php if (isset($errors['body'])) { ?>
             <span class="text-danger"><?= $errors['body'] ?></span>
           <?php } ?>
